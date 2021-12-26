@@ -1,4 +1,4 @@
-# githubfinder
+# Githubfinder
 
 A react app that consumes the github api. 
 You can: 
