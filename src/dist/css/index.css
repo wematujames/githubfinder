@@ -28,22 +28,24 @@ nav {
 .nav-item {
 	padding-left: 25px;
 }
-
+/* utility classes */
+.full-width {
+	width: 100%;
+}
+.block-input {
+	width: 100%;
+	padding: 0.5rem;
+	outline: none;
+	margin: 1rem 0;
+}
 /* App content */
-.app-container {
+.container {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	min-width: 100vw;
-	min-height: 100%;
+	width: 100vw;
+	max-width: 1080px;
 	padding: 1rem;
-}
-.search {
-	margin: 1rem;
-	padding: 0.5rem 0.8rem;
-	width: 100%;
-	outline: none;
+	margin: 0 auto;
 }
 .search-btn {
 	width: 100%;
@@ -51,13 +53,13 @@ nav {
 	border: none;
 	background: var(--primary-color);
 	color: white;
-	margin: 0.5rem;
+	margin-bottom: 0.5rem;
 }
 .clear-btn {
 	width: 100%;
 	padding: 0.5rem;
 	border: none;
-	margin: 0.5rem;
+	margin-bottom: 0.5rem;
 }
 .clear-btn:hover {
 	background: var(--gray-hover);
@@ -66,15 +68,16 @@ nav {
 	background: var(--black-hover);
 }
 .users {
-	display: flex;
-	justify-content: space-evenly;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	justify-items: center;
+	grid-gap: 2.5rem;
 	width: 100%;
 }
 .user-item {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	/* border: 2px solid var(--gray-hover); */
+	align-items: center;
 }
 .avatar-img {
 	width: 60px;
@@ -84,12 +87,25 @@ nav {
 	background: var(--primary-color);
 	padding: 0.5rem;
 	color: white;
+	width: 3.5rem;
+	text-align: center;
 	text-decoration: none;
 }
-.overall {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	width: 80%;
+/* 600px and down mobile devices */
+@media only screen and (max-width: 600px) {
+	.container {
+		padding: 0.5rem;
+	}
+	.users {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+/* Extra small devices */
+@media only screen and (max-width: 300px) {
+	.container {
+		padding: 0.5rem;
+	}
+	.users {
+		grid-template-columns: repeat(2, 1fr);
+	}
 }
