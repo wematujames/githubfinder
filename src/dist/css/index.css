@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,100;1,900&family=Pacifico&display=swap");
+
 :root {
 	--primary-color: #111;
 	--gray-hover: #808080;
@@ -9,11 +11,17 @@
 	box-sizing: border-box;
 	transition-duration: 0.3s;
 }
+body {
+	font-family: "Lato", sans-serif;
+}
 li {
 	list-style: none;
 }
 
 /* Navbar */
+.logo {
+	font-family: "Pacifico", cursive;
+}
 nav {
 	background: var(--primary-color);
 	padding: 0.5rem 1rem;
@@ -22,11 +30,28 @@ nav {
 	justify-content: space-between;
 	font-weight: 500;
 }
-.nav-items {
+.nav-wrapper {
 	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100vw;
+	max-width: 1080px;
+	margin: 0 auto;
+	padding: 0 1rem;
+}
+.nav-items {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 1rem;
+	justify-items: right;
 }
 .nav-item {
-	padding-left: 25px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.nav-item:hover,
+.link-btn:hover {
+	color: var(--gray-hover);
 }
 /* utility classes */
 .full-width {
@@ -42,10 +67,11 @@ nav {
 .container {
 	display: flex;
 	flex-direction: column;
+	text-align: center;
 	width: 100vw;
 	max-width: 1080px;
 	padding: 1rem;
-	margin: 0 auto;
+	margin: 0 auto 1rem;
 }
 .search-btn {
 	width: 100%;
@@ -59,7 +85,7 @@ nav {
 	width: 100%;
 	padding: 0.5rem;
 	border: none;
-	margin-bottom: 0.5rem;
+	margin-bottom: 1rem;
 }
 .clear-btn:hover {
 	background: var(--gray-hover);
@@ -71,7 +97,7 @@ nav {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	justify-items: center;
-	grid-gap: 2.5rem;
+	grid-gap: 2rem;
 	width: 100%;
 }
 .user-item {
@@ -82,17 +108,22 @@ nav {
 .avatar-img {
 	width: 60px;
 	border-radius: 50%;
+	margin-top: 5px;
 }
 .link-btn {
 	background: var(--primary-color);
-	padding: 0.5rem;
+	padding: 0.3rem 0.4rem 0.4rem;
 	color: white;
-	width: 3.5rem;
+	width: 3.8rem;
 	text-align: center;
 	text-decoration: none;
+	margin-top: 5px;
 }
 /* 600px and down mobile devices */
 @media only screen and (max-width: 600px) {
+	.nav-wrapper {
+		padding: 0;
+	}
 	.container {
 		padding: 0.5rem;
 	}
@@ -102,6 +133,9 @@ nav {
 }
 /* Extra small devices */
 @media only screen and (max-width: 300px) {
+	.nav-wrapper {
+		padding: 0rem;
+	}
 	.container {
 		padding: 0.5rem;
 	}

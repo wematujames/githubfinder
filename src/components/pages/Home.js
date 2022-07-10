@@ -1,18 +1,13 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 import Search from "../Utility/Search";
 import Users from "../Users/Users";
 
-function Home({ searchUsers, getUsers, users }) {
-	useEffect(() => {
-		getUsers();
-		//eslint-disable-next-line
-	}, []);
-
+function Home() {
 	return (
 		<div className="full-width">
-			<Search searchUsers={searchUsers} />
-			<Users users={users} />
+			<Search />
+			<Users />
 		</div>
 	);
 }

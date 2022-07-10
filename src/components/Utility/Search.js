@@ -1,16 +1,34 @@
-import React, { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
-function Search({ searchUsers }) {
+import GithubContext from "../../context/github/GithubContext";
+import AlertContext from "../../context/alert/AlertContext";
+
+function Search() {
 	const [searchTerm, setSearchTerm] = useState("");
+	const githubContext = useContext(GithubContext);
+	const alertContext = useContext(AlertContext);
+
+	const { setAlert, alert } = alertContext;
+	const { error, searchUsers, setLoading } = githubContext;
 
 	const handleSearch = e => {
 		e.preventDefault();
-		if (!searchTerm) return;
+		if (!searchTerm) {
+			setAlert("Please enter something...");
+			return;
+		}
+		setLoading(true);
 		searchUsers(searchTerm);
 	};
 
+	useEffect(() => {
+		if (error) setAlert("something went wrong");
+		// eslint-disable-next-line
+	}, [error]);
+
 	return (
 		<form className="search-form" onSubmit={handleSearch}>
+			{alert && <div className="alert">{alert}</div>}
 			<input
 				type="text"
 				name="search"
