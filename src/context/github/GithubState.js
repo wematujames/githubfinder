@@ -9,7 +9,8 @@ import {
 	SEARCH_USERS,
 	SET_ERROR,
 	SET_LOADING,
-	CLEAR_ERROR
+	CLEAR_ERROR,
+	CLEAR_USERS
 } from "../types";
 
 const GithubState = props => {
@@ -51,6 +52,11 @@ const GithubState = props => {
 		}
 	};
 
+	//Clear user from screen
+	const clearUsers = () => {
+		dispatch({ type: CLEAR_USERS });
+	};
+
 	// Set loading for spinner to show
 	const setLoading = state => {
 		dispatch({ type: SET_LOADING, payload: state });
@@ -64,7 +70,8 @@ const GithubState = props => {
 				loading: state.loading,
 				getUsers,
 				searchUsers,
-				setLoading
+				setLoading,
+				clearUsers
 			}}>
 			{props.children}
 		</GithubContext.Provider>

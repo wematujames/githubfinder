@@ -3,7 +3,8 @@ import {
 	CLEAR_ERROR,
 	SEARCH_USERS,
 	SET_LOADING,
-	SET_ERROR
+	SET_ERROR,
+	CLEAR_USERS
 } from "../types";
 
 const GithubReducer = (state, action) => {
@@ -25,6 +26,11 @@ const GithubReducer = (state, action) => {
 			return {
 				...state,
 				error: null
+			};
+		case CLEAR_USERS:
+			return {
+				...state,
+				users: []
 			};
 		case SET_LOADING:
 			return {
