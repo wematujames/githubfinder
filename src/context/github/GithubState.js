@@ -13,6 +13,12 @@ import {
 	CLEAR_USERS
 } from "../types";
 
+const githubEndpoint = "https://api.github.com";
+const githubreqparams = {
+	client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
+	client_secret: process.env.REACT_APP_GITHUB_CLIENT_SECRET
+};
+
 const GithubState = props => {
 	const initialState = {
 		users: [],
@@ -26,7 +32,9 @@ const GithubState = props => {
 	//Get github users
 	const getUsers = async () => {
 		try {
-			const res = await axios.get("https://api.github.com/users");
+			const res = await axios.get(`${githubEndpoint}/users`, {
+				params: githubreqparams
+			});
 			dispatch({ type: GET_USERS, payload: res.data });
 		} catch (e) {
 			dispatch({ type: SET_ERROR, payload: e });
@@ -40,7 +48,10 @@ const GithubState = props => {
 	const searchUsers = async queryStr => {
 		try {
 			const foundUsers = await axios.get(
-				`https://api.github.com/search/users?q=${queryStr}`
+				`${githubEndpoint}/search/users`,
+				{
+					params: { q: `${queryStr}`, ...githubreqparams }
+				}
 			);
 			console.log(foundUsers.data.items);
 			dispatch({ type: SEARCH_USERS, payload: foundUsers.data.items });

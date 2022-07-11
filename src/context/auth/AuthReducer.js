@@ -1,16 +1,35 @@
-import { SET_ALERT, CLEAR_ALERT } from "../types";
+import { AUTH_ERROR, CLEAR_ERROR, LOGIN, LOAD_USER, LOGOUT } from "../types";
 
 const AuthReducer = (state, action) => {
 	switch (action.type) {
-		case SET_ALERT:
+		case LOGIN:
+			localStorage.setItem("token", action.payload);
 			return {
 				...state,
-				alert: action.payload
+				token: action.payload
 			};
-		case CLEAR_ALERT:
+		case LOAD_USER:
 			return {
 				...state,
-				alert: null
+				user: action.payload,
+				loading: false,
+				isAuthenticated: true
+			};
+		case LOGOUT:
+		case AUTH_ERROR:
+			localStorage.removeItem("token");
+			return {
+				...state,
+				isAuthenticated: false,
+				user: null,
+				token: null,
+				loading: false,
+				authError: action.payload
+			};
+		case CLEAR_ERROR:
+			return {
+				...state,
+				authError: null
 			};
 		default:
 			return { ...state };

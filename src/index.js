@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import App from "./App"; //App
 import "./dist/css/index.css"; //CSS
@@ -12,14 +13,18 @@ import UserState from "./context/user/UserState";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
-		<AuthState>
-			<UserState>
-				<GithubState>
-					<AlertState>
-						<App />
-					</AlertState>
-				</GithubState>
-			</UserState>
-		</AuthState>
+		<Router>
+			<AuthState>
+				<UserState>
+					<GithubState>
+						<AlertState>
+							<Routes>
+								<Route path="/*" element={<App />} />
+							</Routes>
+						</AlertState>
+					</GithubState>
+				</UserState>
+			</AuthState>
+		</Router>
 	</React.StrictMode>
 );
