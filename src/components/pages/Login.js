@@ -39,30 +39,37 @@ function Login() {
 	);
 
 	return (
-		<div>
-			<form onSubmit={handleSubmit} id="login-form">
-				<label htmlFor="user">Username/Email</label>
+		<section id="login" className="comp-wrapper block">
+			<form
+				onSubmit={handleSubmit}
+				id="login-form"
+				className="form round-sm">
+				<div className="form-header" id="login-form-header">
+					<h3>Login</h3>
+				</div>
 				<input
+					className="form-input round-sm m-y"
 					type="text"
 					id="user"
 					name="user"
-					placeholder=""
+					placeholder="Username or email"
 					value={loginInfo.user}
 					onChange={handleChange}
 				/>
-				<label htmlFor="password">Password</label>
 				<input
-					type="text"
+					className="form-input round-sm"
+					type="password"
 					id="password"
 					name="password"
-					placeholder=""
+					placeholder="Password"
 					value={loginInfo.password}
 					onChange={handleChange}
 				/>
-				<button type="submit">Login</button>
+				<button type="submit" className="btn round-sm m-y">
+					Login
+				</button>
 			</form>
-		</div>
+		</section>
 	);
 }
-
 export default Login;

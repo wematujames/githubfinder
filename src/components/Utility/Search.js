@@ -39,15 +39,20 @@ function Search() {
 					type="text"
 					name="search"
 					id="search"
+					placeholder="Search for someone..."
 					className="block-input"
 					value={searchTerm}
 					onChange={e => setSearchTerm(e.target.value)}
 				/>
-				<button type="submit" className="search-btn">
+				<button
+					type="submit"
+					className="btn btn-dark btn-block hover-light">
 					Search
 				</button>
 			</form>
-			<button onClick={clearScreen} className="clear-btn">
+			<button
+				onClick={clearScreen}
+				className="btn btn-light btn-block hover-light">
 				Clear
 			</button>
 		</>
