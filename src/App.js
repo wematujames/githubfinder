@@ -1,5 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
+import "materialize-css/dist/css/materialize.min.css";
+import M from "materialize-css/dist/js/materialize.min.js";
+
 //Other comps
 import Outlet from "./components/Layout/Layout";
 import Login from "./components/pages/Login";
@@ -9,8 +12,14 @@ import NotFound from "./components/pages/NotFound";
 
 //Route protection
 import EnsureAuth from "./components/routing/EnsureAuth";
+import { useEffect } from "react";
 
 function App() {
+	useEffect(() => {
+		//Initialize mcss comps
+		M.AutoInit();
+	}, []);
+
 	return (
 		<Routes>
 			<Route path="/" element={<Outlet />}>

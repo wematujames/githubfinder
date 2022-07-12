@@ -1,12 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
 import NotificationItem from "./NotificationItem";
 
 function Notifications({ notifications }) {
 	return (
 		<div className="notification-wrapper show">
 			{notifications.map(n => (
-				<NotificationItem notification={n} />
+				<NotificationItem notification={n} key={n.id} />
 			))}
 		</div>
 	);

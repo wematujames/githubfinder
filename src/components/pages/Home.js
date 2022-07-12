@@ -1,12 +1,10 @@
-// import { useEffect } from "react";
-
-import Search from "../Utility/Search";
+import SearchUsers from "../Users/SearchUsers";
 import Users from "../Users/Users";
 
 function Home() {
 	return (
 		<div className="block">
-			<Search />
+			<SearchUsers />
 			<Users />
 		</div>
 	);
