@@ -5,13 +5,18 @@ import axios from "axios";
 import AuthContext from "./AuthContext";
 import AuthReducer from "./AuthReducer";
 import setAuthTokenHeader from "../helpers/setAuthToken";
-import { AUTH_ERROR, CLEAR_ERROR, LOGIN, LOAD_USER, LOGOUT } from "../types";
-
-const authBaseUrl = "http://localhost:5000/api/v1/auth";
+import {
+	AUTH_ERROR,
+	CLEAR_ERROR,
+	LOGIN,
+	LOAD_USER,
+	LOGOUT,
+	REGISTER_USER
+} from "../types";
 
 const AuthState = props => {
 	const initialState = {
-		user: null,
+		user: {},
 		authError: null,
 		token: localStorage.getItem("token"),
 		isAuthenticated: false,
@@ -21,10 +26,15 @@ const AuthState = props => {
 	const [state, dispatch] = useReducer(AuthReducer, initialState);
 
 	//Register user
-	const registerUser = async creds => {
+	const registerUser = async regInfo => {
 		try {
-			const res = await axios.post();
-			dispatch({ type: LOGIN, payload: res.data.token });
+			const res = await axios.post(
+				"http://localhost:5000/api/v1/auth/register",
+				regInfo
+			);
+			dispatch({ type: REGISTER_USER, payload: res.data.token });
+			setAuthTokenHeader();
+			loadUser();
 		} catch (e) {
 			errHandler(e);
 		}
@@ -33,11 +43,12 @@ const AuthState = props => {
 	//Login
 	const login = async creds => {
 		try {
-			const res = await axios.post(`${authBaseUrl}/login`, creds, {
-				"Content-Type": "application/json"
-			});
-			console.log(res.data);
+			const res = await axios.post(
+				"http://localhost:5000/api/v1/auth/login",
+				creds
+			);
 			dispatch({ type: LOGIN, payload: res.data.token });
+			setAuthTokenHeader();
 			loadUser();
 		} catch (e) {
 			errHandler(e);
@@ -48,8 +59,7 @@ const AuthState = props => {
 	const loadUser = async () => {
 		setAuthTokenHeader();
 		try {
-			const res = await axios.get(`${authBaseUrl}/me`);
-			console.log();
+			const res = await axios.get("http://localhost:5000/api/v1/auth/me");
 			dispatch({ type: LOAD_USER, payload: res.data.data });
 		} catch (e) {
 			errHandler(e);
@@ -59,20 +69,20 @@ const AuthState = props => {
 	//Logout user
 	const logOut = async () => {
 		try {
-			const res = await axios.get("");
-			dispatch({ type: LOGOUT, payload: res.data });
+			await axios.post("http://localhost:5000/api/v1/auth/logout");
+			dispatch({ type: LOGOUT });
 		} catch (e) {
 			errHandler(e);
 		}
 	};
 
-	//error dispatecher fund
+	//error dispatcher func
 	const errHandler = e => {
-		console.log(e);
-		console.log(e.response?.data);
 		dispatch({
 			type: AUTH_ERROR,
-			payload: e.response?.data || "Something went wrong"
+			payload: e.response?.data?.error?.msg
+				? e.response.data.error.msg
+				: "Something went wrong please try again later..."
 		});
 		setTimeout(() => {
 			dispatch({ type: CLEAR_ERROR });

@@ -14,10 +14,9 @@ import {
 	SET_SEARCHTERM
 } from "../types";
 
-const githubEndpoint = "https://api.github.com";
-const githubreqparams = {
-	// client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
-	// client_secret: process.env.REACT_APP_GITHUB_CLIENT_SECRET
+const params = {
+	client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
+	client_secret: process.env.REACT_APP_GITHUB_CLIENT_SECRET
 };
 
 const GithubState = props => {
@@ -34,8 +33,8 @@ const GithubState = props => {
 	//Get github users
 	const getUsers = async () => {
 		try {
-			const res = await axios.get(`${githubEndpoint}/users`, {
-				params: githubreqparams
+			const res = await axios.get("https://api.github.com/users", {
+				params
 			});
 			dispatch({ type: GET_USERS, payload: res.data });
 		} catch (e) {
@@ -50,9 +49,9 @@ const GithubState = props => {
 	const searchUsers = async queryStr => {
 		try {
 			const foundUsers = await axios.get(
-				`${githubEndpoint}/search/users`,
+				`https://api.github.com/search/users`,
 				{
-					params: { q: `${queryStr}`, ...githubreqparams }
+					params: { q: `${queryStr}` }
 				}
 			);
 			dispatch({ type: SEARCH_USERS, payload: foundUsers.data.items });

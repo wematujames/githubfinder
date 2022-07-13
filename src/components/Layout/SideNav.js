@@ -1,27 +1,23 @@
 import React from "react";
 import useAuth from "../hooks/useAuth";
 
-function SideNav() {
-	const { user: profile_img } = useAuth();
+const SideNav = () => {
+	const { user } = useAuth();
 
 	return (
 		<ul id="slide-out" className="sidenav">
 			<li>
 				<div className="user-view">
 					<a href="#user">
-						<img
-							className="circle"
-							src={profile_img || ""}
-							alt="avatar"
-						/>
+						<img className="circle" src="" alt="avatar" />
 					</a>
 					<a href="#name">
-						<span className="black-text name">John Doe</span>
+						<span className="black-text name">
+							{user.fName} {user.lName}
+						</span>
 					</a>
 					<a href="#email">
-						<span className="white-text email">
-							jdandturk@gmail.com
-						</span>
+						<span className="black-text email">{user.email}</span>
 					</a>
 				</div>
 			</li>
@@ -30,6 +26,6 @@ function SideNav() {
 			</li>
 		</ul>
 	);
-}
+};
 
 export default SideNav;

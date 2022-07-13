@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import useGithub from "../hooks/useGithub";
 import useAlert from "../hooks/useAlert";
 
 import Alert from "../Layout/Alert";
 
-function Search() {
+const Search = () => {
 	const { setAlert, alert } = useAlert();
 	const {
 		githubError,
@@ -50,28 +50,30 @@ function Search() {
 	}, [githubError]);
 
 	return (
-		<>
+		<section className="center">
 			<div style={styles.alertContainer}>
 				{alert && <Alert msg={alert} />}
 			</div>
-			<input
-				type="text"
-				name="search"
-				id="search"
-				placeholder="Search for someone..."
-				className="block-input"
-				value={searchTerm}
-				onChange={handleChange}
-			/>
+			<div className="input-field">
+				<input
+					type="text"
+					name="search"
+					id="search"
+					className="block-input"
+					value={searchTerm}
+					onChange={handleChange}
+				/>
+				<label htmlFor="fName">Search for someone...</label>
+			</div>
 			<button
 				style={styles.clearBtn}
 				onClick={clearScreen}
-				className="btn block hoverable waves-effect wave-light grey lighten-2 black-text">
+				className="btn hoverable waves-effect full-width">
 				Clear
 			</button>
-		</>
+		</section>
 	);
-}
+};
 
 const styles = {
 	alertContainer: {

@@ -2,10 +2,8 @@ import React from "react";
 
 import useAuth from "../hooks/useAuth";
 
-function NavItems() {
+const NavItems = () => {
 	const { logOut } = useAuth();
-
-	const logoutUser = () => logOut();
 
 	return (
 		<ul className="right hide-on-med-and-down">
@@ -16,12 +14,12 @@ function NavItems() {
 				<a href="/about">About</a>
 			</li>
 			<li>
-				<a href="#!" onClick={logoutUser}>
+				<a href="#!" onClick={logOut}>
 					Logout
 				</a>
 			</li>
 		</ul>
 	);
-}
+};
 
 export default NavItems;

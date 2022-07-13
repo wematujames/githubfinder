@@ -9,6 +9,7 @@ export const SET_SEARCHTERM = "SET_SEARCHTERM";
 export const GET_USER_SEARCH_HISTORY = "GET_USER_SEARCH_HISTORY";
 
 // Auth
+export const REGISTER_USER = "REGISTER_USER";
 export const LOGIN = "LOGIN";
 export const LOAD_USER = "LOAD_USER";
 export const LOGOUT = "LOGOUT";

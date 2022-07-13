@@ -1,19 +1,16 @@
 import { Outlet } from "react-router-dom";
 
-//comps
 import Navbar from "./Navbar";
-import Notifications from "./Notifications";
 
-function Layout() {
+const Layout = () => {
 	return (
-		<main className="App">
-			<Notifications />
+		<main>
 			<Navbar />
 			<div className="container">
 				<Outlet />
 			</div>
 		</main>
 	);
-}
+};
 
 export default Layout;

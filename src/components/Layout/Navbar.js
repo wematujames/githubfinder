@@ -3,13 +3,13 @@ import { Fragment } from "react";
 import NavItems from "./NavItems";
 import SideNav from "./SideNav";
 
-function Navbar() {
+const Navbar = () => {
 	return (
 		<Fragment>
 			<nav>
 				<div className="nav-wrapper container">
 					<a href="/" className="brand-logo">
-						Gihub Finder
+						Github Finder
 					</a>
 					<a
 						href="#!"
@@ -23,5 +23,5 @@ function Navbar() {
 			<SideNav />
 		</Fragment>
 	);
-}
+};
 export default Navbar;

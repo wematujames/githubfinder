@@ -1,13 +1,13 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import useAuth from "../hooks/useAuth";
 import useAlert from "../hooks/useAlert";
+import Alert from "../Layout/Alert";
 
-function Login() {
-	const { user, login, loadUser, authError } = useAuth();
-	const { setAlert } = useAlert();
+const Login = () => {
+	const { user, login, loadUser, authError, token } = useAuth();
+	const { setAlert, alert } = useAlert();
 	const [loginInfo, setLoginInfo] = useState({ user: "", password: "" });
 
 	const location = useLocation();
@@ -17,7 +17,7 @@ function Login() {
 	const handleSubmit = async e => {
 		e.preventDefault();
 		if (!loginInfo.password || !loginInfo.user) {
-			return;
+			return setAlert("Please complete all fields");
 		}
 		login(loginInfo);
 	};
@@ -28,48 +28,51 @@ function Login() {
 	useEffect(
 		function () {
 			if (authError) setAlert(authError);
-			//user or token
-			if (user && localStorage.token) navigate(from, { replace: true });
-			else if (localStorage.token && !user) {
-				loadUser();
-			}
+			if (token) loadUser();
+			if (user) navigate(from, { replace: true });
 		},
 		//eslint-disable-next-line
-		[user, localStorage.token, authError]
+		[user, token, authError]
 	);
 
 	return (
-		<section id="login" className="comp-wrapper block">
+		<section className="form-wrapper">
 			<form
 				onSubmit={handleSubmit}
-				id="login-form"
-				className="form round-sm">
-				<div className="form-header" id="login-form-header">
+				id="login"
+				className="form center z-depth-2">
+				<div className="form-header">
 					<h3>Login</h3>
 				</div>
-				<input
-					className="form-input round-sm m-y"
-					type="text"
-					id="user"
-					name="user"
-					placeholder="Username or email"
-					value={loginInfo.user}
-					onChange={handleChange}
-				/>
-				<input
-					className="form-input round-sm"
-					type="password"
-					id="password"
-					name="password"
-					placeholder="Password"
-					value={loginInfo.password}
-					onChange={handleChange}
-				/>
-				<button type="submit" className="btn round-sm m-y">
-					Login
-				</button>
+				{alert && <Alert msg={alert} />}
+				<div className="row">
+					<div className="input-field col s12">
+						<input
+							id="user"
+							type="text"
+							name="user"
+							className="validate"
+							value={loginInfo.user}
+							onChange={handleChange}
+						/>
+						<label htmlFor="user">Email</label>
+					</div>
+					<div className="input-field col s12">
+						<input
+							id="password"
+							type="password"
+							name="password"
+							value={loginInfo.password}
+							onChange={handleChange}
+						/>
+						<label htmlFor="password">Password</label>
+					</div>
+					<button type="submit" className="btn my full-width col l12">
+						Login
+					</button>
+				</div>
 			</form>
 		</section>
 	);
-}
+};
 export default Login;

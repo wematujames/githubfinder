@@ -21,164 +21,84 @@
 body {
 	font-family: "Lato", sans-serif;
 }
+
 /* Navbar */
+nav {
+	background: var(--primary-color);
+}
 .brand-logo {
 	font-family: "Pacifico", cursive;
 }
-nav {
-	background: var(--primary-color);
-	/* font-weight: 500; */
-}
-
-/* general utility classes */
-.block {
-	width: 100%;
-}
-.block-input {
-	width: 100%;
-	padding: 0.5rem;
-	outline: none;
-	margin: 1rem 0;
-	border-bottom: #111;
-}
-.m-y {
-	margin-top: 1rem;
-}
-/* Forms  */
-.form {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	padding: 1rem 2rem;
-	border: 1px solid var(--gray-hover);
-	-webkit-box-shadow: 3px 4px 6px 1px rgba(0, 0, 0, 0.15);
-	box-shadow: 3px 4px 6px 1px rgba(0, 0, 0, 0.15);
-}
-.form-header {
-	font-size: 2rem;
-	margin: 0.5rem 5rem;
-}
-.form-input {
-	display: block;
-	outline: none;
-	margin-bottom: 0.5rem;
-	padding: 0.5rem 1rem;
-	border: 0.3px solid var(--gray-hover);
-	font-size: 1rem;
-	font-weight: medium;
-	font-family: "Lato", sans-serif;
-}
-/* Items wrapper, flex */
-.comp-wrapper {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	min-height: 50vh;
-	max-width: 450px;
-	position: relative;
-	margin: auto;
-}
-/* Buttons */
-.form-submit-btn {
-	margin: 1rem 0;
-}
-/* Border rounding */
-.round-sm {
-	border-radius: var(--round-sm);
-}
-.round-md {
-	border-radius: var(--round-md);
-}
-.round-lg {
-	border-radius: var(--round-lg);
-}
-/* General utility colors */
-.err {
-	color: var(--error);
-}
-/* Notifcations & notification colors */
-.notification-wrapper {
-	position: absolute;
-	top: 45px;
-	right: -500px;
-}
-.notification-wrapper.show {
-	/* right: 0; */
-}
-.notification-content {
-	max-width: 15rem;
-	margin-left: auto;
-	background: var(--primary-color);
+.brand-logo:hover {
 	color: white;
-	font-weight: medium;
-	padding: 0.7rem;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	position: relative;
-	z-index: 2;
 }
-.n-err {
-	border: 1px solid var(--error);
-	border-left: 5px solid var(--error);
-}
-.n-notify {
-	border: 1px solid var(--notification);
-	border-left: 5px solid var(--notification);
-}
-.n-warn {
-	border: 1px solid var(--warning);
-	border-left: 5px solid var(--warning);
-}
-.n-general {
-	border: 1px solid var(--warning);
-	border-left: 5px solid var(--gray-hover);
-}
-/* App content */
-.container1 {
-	display: flex;
-	flex-direction: column;
-	text-align: center;
-	width: 100vw;
-	max-width: 1080px;
-	padding: 1rem;
-	margin: 0 auto 1rem;
-}
-.users {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	justify-items: center;
-	grid-gap: 2rem;
-	width: 100%;
+/* users */
+#users-container {
+	margin-top: 2rem;
 }
 .user-item {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	margin-bottom: 1rem;
 }
 .avatar-img {
 	width: 60px;
 	border-radius: 50%;
 	margin-top: 5px;
 }
-/* 600px and down mobile devices */
-@media only screen and (max-width: 600px) {
-	.nav-wrapper {
-		padding: 0;
-	}
-	.container {
-		padding: 0.5rem;
-	}
-	.users {
-		grid-template-columns: repeat(3, 1fr);
-	}
-	.notification-content {
-	}
+/* login */
+.form-wrapper {
+	min-height: 90vh;
+	padding-top: 2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-/* Extra small devices */
-@media only screen and (max-width: 300px) {
-	.users {
-		grid-template-columns: repeat(2, 1fr);
-	}
+.form {
+	padding: 0.5rem 1rem;
+	border-radius: 5px;
+	max-width: 400px;
+}
+/* Alert */
+.alert-wrapper {
+	border: 2px solid red;
+	border-radius: 5px;
+	padding: 0.7rem 1.2rem;
+	margin: 1rem 0.5rem;
+	display: flex;
+	align-items: center;
+}
+.alert-msg {
+	margin-left: 0.5rem;
+	flex: 1;
+}
+.close {
+	cursor: pointer;
+}
+/* Utility */
+.btn {
+	background: var(--primary-color);
+}
+.btn:hover,
+.btn:active,
+.btn:focus {
+	background: var(--black-hover);
+}
+a:hover {
+	color: var(--black-hover);
+}
+.mx {
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+.mt {
+	margin-top: 1rem;
+}
+.mt {
+	margin-bottom: 1rem;
+}
+.my {
+	margin-bottom: 1rem;
+	margin-top: 1rem;
+}
+.full-width {
+	width: 100%;
 }

@@ -1,14 +1,12 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 
-import GithubContext from "../../context/github/GithubContext";
+import useGithub from "../../components/hooks/useGithub";
 
 import UserItem from "./UserItem";
-import PreLoader from "../Utility/PreLoader";
+import PreLoader from "../Layout/PreLoader";
 
-function Users() {
-	const githubContext = useContext(GithubContext);
-
-	const { loading, getUsers } = githubContext; //users,
+const Users = () => {
+	const { loading, getUsers } = useGithub(); //users,
 
 	const users = [
 		{
@@ -62,11 +60,11 @@ function Users() {
 
 	if (loading) return <PreLoader />;
 	return (
-		<div className="row">
+		<div id="users-container" className="row ">
 			{users.map(user => (
 				<UserItem key={user.id} user={user} />
 			))}
 		</div>
 	);
-}
+};
 export default Users;

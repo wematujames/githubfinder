@@ -1,7 +1,15 @@
-import { AUTH_ERROR, CLEAR_ERROR, LOGIN, LOAD_USER, LOGOUT } from "../types";
+import {
+	AUTH_ERROR,
+	CLEAR_ERROR,
+	LOGIN,
+	LOAD_USER,
+	LOGOUT,
+	REGISTER_USER
+} from "../types";
 
 const AuthReducer = (state, action) => {
 	switch (action.type) {
+		case REGISTER_USER:
 		case LOGIN:
 			localStorage.setItem("token", action.payload);
 			return {
@@ -16,12 +24,21 @@ const AuthReducer = (state, action) => {
 				isAuthenticated: true
 			};
 		case LOGOUT:
+			localStorage.removeItem("token");
+			return {
+				...state,
+				isAuthenticated: false,
+				user: {},
+				token: null,
+				loading: false,
+				authError: null
+			};
 		case AUTH_ERROR:
 			localStorage.removeItem("token");
 			return {
 				...state,
 				isAuthenticated: false,
-				user: null,
+				user: {},
 				token: null,
 				loading: false,
 				authError: action.payload
