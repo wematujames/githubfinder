@@ -1,12 +1,13 @@
-import SearchUsers from "../Users/SearchUsers";
+import { Fragment } from "react";
+import SearchForm from "../Users/SearchForm";
 import Users from "../Users/Users";
 
 function Home() {
 	return (
-		<div className="block">
-			<SearchUsers />
+		<Fragment>
+			<SearchForm />
 			<Users />
-		</div>
+		</Fragment>
 	);
 }
 export default Home;

@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 
-import SideNav from "./SideNav";
 import NavItems from "./NavItems";
+import SideNav from "./SideNav";
 
 function Navbar() {
 	return (

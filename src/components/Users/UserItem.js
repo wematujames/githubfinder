@@ -3,8 +3,12 @@ import PropTypes from "prop-types";
 
 function UserItem({ user }) {
 	return (
-		<div className="user-item">
-			<img className="avatar-img" src={user.avatar_url} alt="user_avator" />
+		<div className="col l3 m4 s4 center-align">
+			<img
+				className="avatar-img"
+				src={user.avatar_url}
+				alt="user_avator"
+			/>
 			<div>{user.login}</div>
 			<a className="link-btn" href={user.html_url}>
 				More

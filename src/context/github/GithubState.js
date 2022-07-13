@@ -10,20 +10,22 @@ import {
 	SET_ERROR,
 	SET_LOADING,
 	CLEAR_ERROR,
-	CLEAR_USERS
+	CLEAR,
+	SET_SEARCHTERM
 } from "../types";
 
 const githubEndpoint = "https://api.github.com";
 const githubreqparams = {
-	client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
-	client_secret: process.env.REACT_APP_GITHUB_CLIENT_SECRET
+	// client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
+	// client_secret: process.env.REACT_APP_GITHUB_CLIENT_SECRET
 };
 
 const GithubState = props => {
 	const initialState = {
 		users: [],
-		loading: true,
-		error: null
+		loading: false,
+		githubError: null,
+		searchTerm: ""
 	};
 
 	const [state, dispatch] = useReducer(GithubReducer, initialState);
@@ -53,19 +55,23 @@ const GithubState = props => {
 					params: { q: `${queryStr}`, ...githubreqparams }
 				}
 			);
-			console.log(foundUsers.data.items);
 			dispatch({ type: SEARCH_USERS, payload: foundUsers.data.items });
 		} catch (e) {
-			dispatch({ type: SET_ERROR, payload: e });
+			dispatch({ type: SET_ERROR, payload: e.response.data.message });
 			setTimeout(() => {
 				dispatch({ type: CLEAR_ERROR });
 			}, 5000);
 		}
 	};
 
-	//Clear user from screen
-	const clearUsers = () => {
-		dispatch({ type: CLEAR_USERS });
+	//Set search term
+	const setSearch = val => {
+		dispatch({ type: SET_SEARCHTERM, payload: val });
+	};
+
+	//Clear screen
+	const clear = () => {
+		dispatch({ type: CLEAR });
 	};
 
 	// Set loading for spinner to show
@@ -77,12 +83,14 @@ const GithubState = props => {
 		<GithubContext.Provider
 			value={{
 				users: state.users,
-				error: state.error,
+				githubError: state.githubError,
 				loading: state.loading,
+				searchTerm: state.searchTerm,
 				getUsers,
 				searchUsers,
 				setLoading,
-				clearUsers
+				clear,
+				setSearch
 			}}>
 			{props.children}
 		</GithubContext.Provider>

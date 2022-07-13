@@ -4,7 +4,8 @@ import {
 	SEARCH_USERS,
 	SET_LOADING,
 	SET_ERROR,
-	CLEAR_USERS
+	CLEAR,
+	SET_SEARCHTERM
 } from "../types";
 
 const GithubReducer = (state, action) => {
@@ -19,23 +20,29 @@ const GithubReducer = (state, action) => {
 		case SET_ERROR:
 			return {
 				...state,
-				error: action.payload,
+				githubError: action.payload,
 				loading: false
 			};
 		case CLEAR_ERROR:
 			return {
 				...state,
-				error: null
+				githubError: null
 			};
-		case CLEAR_USERS:
+		case CLEAR:
 			return {
 				...state,
-				users: []
+				users: [],
+				searchTerm: ""
 			};
 		case SET_LOADING:
 			return {
 				...state,
 				loading: action.payload
+			};
+		case SET_SEARCHTERM:
+			return {
+				...state,
+				searchTerm: action.payload
 			};
 		default:
 			return { ...state };
