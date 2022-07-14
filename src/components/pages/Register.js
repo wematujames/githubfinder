@@ -124,6 +124,7 @@ const Register = () => {
 				<button type="submit" className="btn my full-width">
 					Register
 				</button>
+				Already have an account? <a href="/login"> Login</a>
 			</form>
 		</section>
 	);

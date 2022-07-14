@@ -48,7 +48,7 @@ const UserProfile = ({ user }) => {
 UserProfile.propTypes = {
 	user: PropTypes.object.isRequired
 };
-UserProfile.propTypes = {
+UserProfile.defaultProps = {
 	user: {
 		fName: "First",
 		lName: "Last",

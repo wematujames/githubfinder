@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 
-import About from "./About";
 import SideNavUserProfile from "./Sidenav/SideNavUserProfile";
+import SideNavItems from "./Sidenav/SideNavItems";
+import About from "../About";
 
 const SideNav = () => {
 	const { user } = useAuth();
@@ -16,9 +17,9 @@ const SideNav = () => {
 
 	return (
 		<ul className="sidenav" id="mobile-demo">
-			{user?.firstName && <SideNavUserProfile user={user} />}
+			<SideNavUserProfile user={user} />
 			<div className="divider"></div>
-			<SideNav />
+			<SideNavItems />
 			<About />
 		</ul>
 	);

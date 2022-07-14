@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import M from "materialize-css/dist/js/materialize.min.js";
 
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 
 const Dropdown = () => {
 	const { logOut } = useAuth();
