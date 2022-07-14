@@ -4,7 +4,9 @@ import {
 	LOGIN,
 	LOAD_USER,
 	LOGOUT,
-	REGISTER_USER
+	REGISTER_USER,
+	GET_USER_SEARCH_HISTORY,
+	SET_LOADING
 } from "../types";
 
 const AuthReducer = (state, action) => {
@@ -22,6 +24,17 @@ const AuthReducer = (state, action) => {
 				user: action.payload,
 				loading: false,
 				isAuthenticated: true
+			};
+		case GET_USER_SEARCH_HISTORY:
+			return {
+				...state,
+				searchHistory: action.payload,
+				loading: false
+			};
+		case SET_LOADING:
+			return {
+				...state,
+				loading: true
 			};
 		case LOGOUT:
 			localStorage.removeItem("token");

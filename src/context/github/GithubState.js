@@ -11,7 +11,8 @@ import {
 	SET_LOADING,
 	CLEAR_ERROR,
 	CLEAR,
-	SET_SEARCHTERM
+	SET_SEARCHTERM,
+	GET_USER
 } from "../types";
 
 const GithubState = props => {
@@ -19,7 +20,8 @@ const GithubState = props => {
 		users: [],
 		loading: false,
 		githubError: null,
-		searchTerm: ""
+		searchTerm: "",
+		user: {}
 	};
 
 	const [state, dispatch] = useReducer(GithubReducer, initialState);
@@ -28,9 +30,7 @@ const GithubState = props => {
 	//Get github users
 	const getUsers = async () => {
 		try {
-			const res = await axios.get(
-				"https://api.github.com/users?client_id=68b673e5140c6135207c&client_secret=ae12df2428ba2d96e353e37ea1f4a6821802a341"
-			);
+			const res = await axios.get("https://api.github.com/users");
 			dispatch({ type: GET_USERS, payload: res.data });
 		} catch (e) {
 			dispatch({ type: SET_ERROR, payload: e });
@@ -41,16 +41,31 @@ const GithubState = props => {
 	};
 
 	//Search for Github user
-	const searchUsers = async queryStr => {
+	const searchUsers = async q => {
 		try {
 			const foundUsers = await axios.get(
 				`https://api.github.com/search/users`,
-				{
-					params: { q: `${queryStr}` }
-				}
+				{ params: { q } }
 			);
 			dispatch({ type: SEARCH_USERS, payload: foundUsers.data.items });
 		} catch (e) {
+			dispatch({ type: SET_ERROR, payload: e.response.data.message });
+			setTimeout(() => {
+				dispatch({ type: CLEAR_ERROR });
+			}, 5000);
+		}
+	};
+
+	//Get User
+	const getUser = async username => {
+		try {
+			setLoading();
+			const res = await axios.get(
+				`https://api.github.com/user/${username}`
+			);
+			dispatch({ type: GET_USER, payload: res.data });
+		} catch (e) {
+			console.log(e);
 			dispatch({ type: SET_ERROR, payload: e.response.data.message });
 			setTimeout(() => {
 				dispatch({ type: CLEAR_ERROR });
@@ -80,6 +95,7 @@ const GithubState = props => {
 				githubError: state.githubError,
 				loading: state.loading,
 				searchTerm: state.searchTerm,
+				getUser,
 				getUsers,
 				searchUsers,
 				setLoading,

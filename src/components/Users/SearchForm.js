@@ -1,12 +1,10 @@
 import { useEffect } from "react";
 
-import useGithub from "../hooks/useGithub";
-import useAlert from "../hooks/useAlert";
+import M from "materialize-css/dist/js/materialize.min.js";
 
-import Alert from "../Layout/Alert";
+import useGithub from "../hooks/useGithub";
 
 const Search = () => {
-	const { setAlert, alert } = useAlert();
 	const {
 		githubError,
 		searchUsers,
@@ -45,13 +43,12 @@ const Search = () => {
 	};
 
 	useEffect(() => {
-		if (githubError) setAlert(githubError);
+		if (githubError) M.toast({ html: `Error: ${githubError}` });
 		// eslint-disable-next-line
 	}, [githubError]);
 
 	return (
 		<section className="center">
-			{alert && <Alert msg={alert} />}
 			<div className="input-field">
 				<input
 					type="text"

@@ -1,19 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const UserSearchHistoryItem = ({ searchItem }) => {
+const UserSearchHistoryItem = ({ searchItem: { searchTerm } }) => {
 	return (
 		<a href="#!" className="collection-item">
-			{searchItem}
+			{searchTerm}
 		</a>
 	);
 };
 
 UserSearchHistoryItem.protoTypes = {
-	searchItem: PropTypes.string.isRequired
+	searchItem: PropTypes.object.isRequired
 };
 UserSearchHistoryItem.defaultProps = {
-	searchItem: ""
+	searchItem: {
+		searchTerm: ""
+	}
 };
 
 export default UserSearchHistoryItem;

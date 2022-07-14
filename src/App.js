@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-
+// {...props}
 //Styling & js
 import "materialize-css/dist/css/materialize.min.css";
 import M from "materialize-css/dist/js/materialize.min.js";
@@ -10,10 +10,12 @@ import Outlet from "./components/Layout/Layout";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import Home from "./components/pages/Home";
+import User from "./components/Users/User";
 import NotFound from "./components/pages/NotFound";
 
 //Route protection
 import EnsureAuth from "./components/routing/EnsureAuth";
+import About from "./components/Layout/About";
 
 function App() {
 	useEffect(() => {
@@ -34,6 +36,8 @@ function App() {
 				{/* Protected routes */}
 				<Route element={<EnsureAuth />}>
 					<Route path="/" element={<Home />} />
+					<Route path="/user/:username" element={<User />} />
+					<Route path="/about" element={<About />} />
 				</Route>
 
 				{/* Not found */}

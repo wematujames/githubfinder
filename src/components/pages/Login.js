@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import M from "materialize-css/dist/js/materialize.min.js";
+
 import useAuth from "../hooks/useAuth";
-import useAlert from "../hooks/useAlert";
-import Alert from "../Layout/Alert";
 
 const Login = () => {
 	const { user, login, loadUser, authError, token } = useAuth();
-	const { setAlert, alert } = useAlert();
+
 	const [loginInfo, setLoginInfo] = useState({ user: "", password: "" });
 
 	const location = useLocation();
@@ -17,7 +17,7 @@ const Login = () => {
 	const handleSubmit = async e => {
 		e.preventDefault();
 		if (!loginInfo.password || !loginInfo.user) {
-			return setAlert("Please complete all fields");
+			return M.toast({ html: "Please complete all fields" });
 		}
 		login(loginInfo);
 	};
@@ -27,7 +27,7 @@ const Login = () => {
 
 	useEffect(
 		function () {
-			if (authError) setAlert(authError);
+			if (authError) M.toast({ html: `Error: ${authError}` });
 			if (token) loadUser();
 			if (user) navigate(from, { replace: true });
 		},
@@ -44,7 +44,6 @@ const Login = () => {
 				<div className="form-header">
 					<h3>Login</h3>
 				</div>
-				{alert && <Alert msg={alert} />}
 				<div className="row">
 					<div className="input-field col s12">
 						<input

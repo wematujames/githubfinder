@@ -1,13 +1,12 @@
-import React from "react";
-
 const About = () => {
 	return (
 		<div className="container center side-menu-about">
-			<span>Github Finder</span>
+			<span>Github Finder v1.0.0</span>
 			<br />
-			<span>V1.0.0</span>
+			<span>Wematu</span>
+			<br />
+			<span>&copy; {new Date().getFullYear()} </span>
 		</div>
 	);
 };
-
 export default About;

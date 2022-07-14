@@ -1,15 +1,13 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import M from "materialize-css/dist/js/materialize.min.js";
+
 import useAuth from "../hooks/useAuth";
-import useAlert from "../hooks/useAlert";
-import Alert from "../Layout/Alert";
 
 const Register = () => {
 	const navigate = useNavigate(); //Navigation
 	const { user, registerUser, loadUser, authError, token } = useAuth();
-	const { setAlert, alert } = useAlert();
 	const [registerInfo, setRegisterInfo] = useState({
 		fName: "",
 		lName: "",
@@ -30,17 +28,18 @@ const Register = () => {
 		const allfieldsCompeleted = Object.values(registerInfo).every(
 			value => !!value
 		);
-		if (!allfieldsCompeleted) return setAlert("Please complete all fields");
+		if (!allfieldsCompeleted)
+			return M.toast({ html: "Please complete all fields" });
 		//Passwords match
 		if (registerInfo.password !== registerInfo.password2)
-			return setAlert("Password do not match");
+			return M.toast({ html: "Password do not match" });
 		//Finally attempt to register user
 		registerUser(registerInfo);
 	};
 
 	useEffect(
 		function () {
-			if (authError) setAlert(authError);
+			if (authError) M.toast({ html: `Error: ${authError}` });
 			if (token) loadUser();
 			if (user) navigate("/", { replace: true });
 		},
@@ -57,7 +56,6 @@ const Register = () => {
 				<div className="form-header">
 					<h3>Register</h3>
 				</div>
-				{alert && <Alert msg={alert} />}
 				<div className="row">
 					<div className="input-field col l6 m6 s12">
 						<input

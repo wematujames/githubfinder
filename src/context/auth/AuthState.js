@@ -11,7 +11,9 @@ import {
 	LOGIN,
 	LOAD_USER,
 	LOGOUT,
-	REGISTER_USER
+	SET_LOADING,
+	REGISTER_USER,
+	GET_USER_SEARCH_HISTORY
 } from "../types";
 
 const AuthState = props => {
@@ -20,7 +22,8 @@ const AuthState = props => {
 		authError: null,
 		token: localStorage.getItem("token"),
 		isAuthenticated: false,
-		loading: true
+		loading: true,
+		searchHistory: []
 	};
 
 	const [state, dispatch] = useReducer(AuthReducer, initialState);
@@ -64,6 +67,19 @@ const AuthState = props => {
 		}
 	};
 
+	//Get user search history
+	const getSearchHistory = async () => {
+		try {
+			setLoading();
+			const res = await axios.get(
+				"http://localhost:5000/api/v1/searchterms/"
+			);
+			dispatch({ type: GET_USER_SEARCH_HISTORY, payload: res.data.data });
+		} catch (e) {
+			errHandler(e);
+		}
+	};
+
 	//Logout user
 	const logOut = async () => {
 		try {
@@ -72,6 +88,11 @@ const AuthState = props => {
 		} catch (e) {
 			errHandler(e);
 		}
+	};
+
+	// Set loading for spinner to show
+	const setLoading = state => {
+		dispatch({ type: SET_LOADING, payload: state });
 	};
 
 	//error dispatcher func
@@ -95,10 +116,13 @@ const AuthState = props => {
 				isAuthenticated: state.isAuthenticated,
 				authError: state.authError,
 				loading: state.loading,
+				searchHistory: state.searchHistory,
+				setLoading,
 				registerUser,
 				login,
 				loadUser,
-				logOut
+				logOut,
+				getSearchHistory
 			}}>
 			{props.children}
 		</AuthContext.Provider>
