@@ -16,7 +16,7 @@ import {
 
 const AuthState = props => {
 	const initialState = {
-		user: {},
+		user: null,
 		authError: null,
 		token: localStorage.getItem("token"),
 		isAuthenticated: false,
@@ -33,8 +33,8 @@ const AuthState = props => {
 				regInfo
 			);
 			dispatch({ type: REGISTER_USER, payload: res.data.token });
-			setAuthTokenHeader();
-			loadUser();
+			// setAuthTokenHeader();
+			// loadUser();
 		} catch (e) {
 			errHandler(e);
 		}
@@ -48,8 +48,6 @@ const AuthState = props => {
 				creds
 			);
 			dispatch({ type: LOGIN, payload: res.data.token });
-			setAuthTokenHeader();
-			loadUser();
 		} catch (e) {
 			errHandler(e);
 		}

@@ -1,29 +1,53 @@
-import React from "react";
-import useAuth from "../hooks/useAuth";
+import React, { useEffect } from "react";
+import M from "materialize-css/dist/js/materialize.min.js";
 
-const SideNav = () => {
-	const { user } = useAuth();
+import me from "../../dist/images/me.jpg";
 
+const SideNav = ({ user }) => {
+	useEffect(() => {
+		const elems = document.querySelectorAll(".sidenav");
+		M.Sidenav.init(elems);
+	}, []);
 	return (
-		<ul id="slide-out" className="sidenav">
-			<li>
-				<div className="user-view">
+		<ul class="sidenav" id="mobile-demo">
+			<li className="container black-text">
+				<div class="user-view center-align">
 					<a href="#user">
-						<img className="circle" src="" alt="avatar" />
+						<img class="circle center" src={me} alt="user-avatar" />
 					</a>
-					<a href="#name">
-						<span className="black-text name">
+					<a href="#name ">
+						<span class="name black-text">
 							{user.fName} {user.lName}
 						</span>
 					</a>
 					<a href="#email">
-						<span className="black-text email">{user.email}</span>
+						<span class="email black-text">{user.email}</span>
 					</a>
 				</div>
 			</li>
+			<div className="divider"></div>
 			<li>
-				<div className="divider"></div>
+				<a
+					href="#!"
+					data-target="user-search-history-modal"
+					class="modal-trigger">
+					Search History
+				</a>
 			</li>
+			<li>
+				<a href="/">Home</a>
+			</li>
+			<li>
+				<a href="/about">About</a>
+			</li>
+			<li>
+				<a href="#!">Logout</a>
+			</li>
+			<div className="container center side-menu-about">
+				<span>Github Finder</span>
+				<br />
+				<span>V1.0.0</span>
+			</div>
 		</ul>
 	);
 };

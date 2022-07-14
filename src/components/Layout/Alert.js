@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 import useAlert from "../hooks/useAlert";
 
@@ -8,7 +8,7 @@ const Alert = ({ msg }) => {
 	return (
 		<div className="alert-wrapper">
 			<i className="material-icons small">info</i>
-			<span className="left-align alert-msg">{msg}</span>
+			<span className="left-align alert-msg">{msg.message || msg}</span>
 			<i onClick={clearAlert} className="material-icons close">
 				close
 			</i>
@@ -16,9 +16,9 @@ const Alert = ({ msg }) => {
 	);
 };
 
-Alert.propTypes = {
-	msg: PropTypes.string.isRequired
-};
+// Alert.propTypes = {
+// 	msg: PropTypes.string.isRequired
+// };
 Alert.defaultProps = {
 	msg: "An error occured"
 };

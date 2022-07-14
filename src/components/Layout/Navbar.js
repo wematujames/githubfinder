@@ -1,9 +1,11 @@
 import { Fragment } from "react";
 
 import NavItems from "./NavItems";
+
+import Modal from "./Modal";
 import SideNav from "./SideNav";
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
 	return (
 		<Fragment>
 			<nav>
@@ -12,15 +14,16 @@ const Navbar = () => {
 						Github Finder
 					</a>
 					<a
-						href="#!"
-						data-target="slide-out"
+						href="#"
+						data-target="mobile-demo"
 						className="sidenav-trigger">
 						<i className="material-icons">menu</i>
 					</a>
 					<NavItems />
 				</div>
 			</nav>
-			<SideNav />
+			<Modal />
+			{user && user.fName && <SideNav user={user} />}
 		</Fragment>
 	);
 };

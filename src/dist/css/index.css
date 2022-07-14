@@ -44,6 +44,16 @@ nav {
 	border-radius: 50%;
 	margin-top: 5px;
 }
+.user-view {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.side-menu-about {
+	margin-top: 20rem;
+	padding-top: auto;
+}
 /* login */
 .form-wrapper {
 	min-height: 90vh;

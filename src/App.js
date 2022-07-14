@@ -17,8 +17,11 @@ import EnsureAuth from "./components/routing/EnsureAuth";
 
 function App() {
 	useEffect(() => {
-		//Initialize mcss comps
-		M.AutoInit();
+		var modal = document.querySelectorAll(".modal");
+		M.Modal.init(modal);
+
+		var elems = document.querySelectorAll(".sidenav");
+		M.Sidenav.init(elems);
 	}, []);
 
 	return (

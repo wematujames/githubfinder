@@ -33,9 +33,9 @@ const GithubState = props => {
 	//Get github users
 	const getUsers = async () => {
 		try {
-			const res = await axios.get("https://api.github.com/users", {
-				params
-			});
+			const res = await axios.get(
+				"https://api.github.com/users?client_id=68b673e5140c6135207c&client_secret=ae12df2428ba2d96e353e37ea1f4a6821802a341"
+			);
 			dispatch({ type: GET_USERS, payload: res.data });
 		} catch (e) {
 			dispatch({ type: SET_ERROR, payload: e });

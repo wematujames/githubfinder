@@ -6,7 +6,8 @@ import useAlert from "../hooks/useAlert";
 import Alert from "../Layout/Alert";
 
 const Login = () => {
-	const { user, login, loadUser, authError, token } = useAuth();
+	const { user, login, loadUser, authError, token, isAuthenticated } =
+		useAuth();
 	const { setAlert, alert } = useAlert();
 	const [loginInfo, setLoginInfo] = useState({ user: "", password: "" });
 
