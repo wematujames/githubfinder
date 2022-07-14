@@ -1,10 +1,8 @@
 import React from "react";
 
-import useAuth from "../hooks/useAuth";
+import Dropdown from "./Dropdown";
 
 const NavItems = () => {
-	const { logOut } = useAuth();
-
 	return (
 		<ul className="right hide-on-med-and-down">
 			<li>
@@ -14,9 +12,13 @@ const NavItems = () => {
 				<a href="/about">About</a>
 			</li>
 			<li>
-				<a href="#!" onClick={logOut}>
-					Logout
+				<a
+					href="#!"
+					className="dropdown-trigger"
+					data-target="user-dropdown">
+					<i className="material-icons">keyboard_arrow_down</i>
 				</a>
+				<Dropdown />
 			</li>
 		</ul>
 	);

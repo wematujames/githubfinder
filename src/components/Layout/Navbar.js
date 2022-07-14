@@ -2,8 +2,10 @@ import { Fragment } from "react";
 
 import NavItems from "./NavItems";
 
-import Modal from "./Modal";
+import UserSearchHistory from "../User/UserSearchHistory";
+import UserProfile from "../User/UserProfile";
 import SideNav from "./SideNav";
+import Dropdown from "./Dropdown";
 
 const Navbar = ({ user }) => {
 	return (
@@ -14,7 +16,7 @@ const Navbar = ({ user }) => {
 						Github Finder
 					</a>
 					<a
-						href="#"
+						href="#!"
 						data-target="mobile-demo"
 						className="sidenav-trigger">
 						<i className="material-icons">menu</i>
@@ -22,8 +24,10 @@ const Navbar = ({ user }) => {
 					<NavItems />
 				</div>
 			</nav>
-			<Modal />
-			{user && user.fName && <SideNav user={user} />}
+			<Dropdown />
+			<UserSearchHistory />
+			{user && user.fName && <UserProfile user={user} />}
+			<SideNav />
 		</Fragment>
 	);
 };

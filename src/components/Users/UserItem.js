@@ -18,6 +18,7 @@ const UserItem = ({ user }) => {
 UserItem.propTypes = {
 	user: PropTypes.object.isRequired
 };
+
 UserItem.defaultProps = {
 	user: {
 		id: 4,

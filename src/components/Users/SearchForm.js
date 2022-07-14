@@ -51,9 +51,7 @@ const Search = () => {
 
 	return (
 		<section className="center">
-			<div style={styles.alertContainer}>
-				{alert && <Alert msg={alert} />}
-			</div>
+			{alert && <Alert msg={alert} />}
 			<div className="input-field">
 				<input
 					type="text"
@@ -66,21 +64,12 @@ const Search = () => {
 				<label htmlFor="fName">Search for someone...</label>
 			</div>
 			<button
-				style={styles.clearBtn}
 				onClick={clearScreen}
-				className="btn hoverable waves-effect full-width">
+				className="btn hoverable waves-effect clear-btn full-width">
 				Clear
 			</button>
 		</section>
 	);
 };
 
-const styles = {
-	alertContainer: {
-		minHeight: "3rem"
-	},
-	clearBtn: {
-		marginTop: "0.5rem"
-	}
-};
 export default Search;

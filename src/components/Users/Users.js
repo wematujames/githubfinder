@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-
 import useGithub from "../../components/hooks/useGithub";
 
 import UserItem from "./UserItem";
