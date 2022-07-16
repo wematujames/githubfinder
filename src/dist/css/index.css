@@ -125,3 +125,10 @@ a:hover {
 	border-bottom: 1px solid var(--link-color) !important;
 	box-shadow: 0 1px 0 0 var(--link-color) !important;
 }
+/* Preloader */
+.loader-container {
+	padding-top: 10rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
