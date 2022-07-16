@@ -9,6 +9,7 @@ const UserSearchHistoryItem = ({ searchItem: { searchTerm, _id } }) => {
 	const removeItem = () => {
 		removeUserSearchTerm(_id);
 	};
+
 	return (
 		<Link to="#!" className="collection-item light-blue-text text-darken-1">
 			{searchTerm}
@@ -20,6 +21,7 @@ const UserSearchHistoryItem = ({ searchItem: { searchTerm, _id } }) => {
 		</Link>
 	);
 };
+
 UserSearchHistoryItem.protoTypes = {
 	searchItem: PropTypes.object.isRequired
 };

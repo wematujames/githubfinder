@@ -1,35 +1,24 @@
-import { useGithub } from "../../context/contextHooks";
+import { useState } from "react";
+import { useGithub, useUser } from "../../context/contextHooks";
 
 const Search = () => {
-	const { searchUsers, setLoading, clear, searchTerm, setSearch } =
-		useGithub();
+	const [searchterm, setSearchTerm] = useState("");
 
-	//Delay search
-	const debounceFn = (func, timeout = 1000) => {
-		let timeoutId;
-		return (...args) => {
-			if (timeoutId) clearTimeout(timeoutId);
-			timeoutId = setTimeout(() => {
-				setLoading(true);
-				func.apply(null, args);
-			}, timeout);
-		};
-	};
-	//search users/debounce
-	const search = debounceFn(searchUsers);
+	const { searchUsers, setLoading, clear, searchTerm, users } = useGithub();
 
-	const handleChange = e => {
-		const { value } = e.target;
-		setSearch(value);
-		if (!value) return;
-		search(value);
-	};
+	const { addUserSearchTerm } = useUser();
 
 	//clear input and fetched users
 	const clearScreen = () => {
 		clear();
-		setSearch("");
 		setLoading(false);
+	};
+
+	//Search users
+	const handleSearch = e => {
+		e.preventDefault();
+		searchUsers(e.target.value);
+		addUserSearchTerm(e.target.value);
 	};
 
 	return (
@@ -40,16 +29,23 @@ const Search = () => {
 					name="search"
 					id="search"
 					className="block-input"
-					value={searchTerm}
-					onChange={handleChange}
+					value={searchterm}
+					onChange={e => setSearchTerm(e.target.value)}
 				/>
 				<label htmlFor="fName">Search for someone...</label>
 			</div>
 			<button
-				onClick={clearScreen}
+				onClick={handleSearch}
 				className="btn hoverable waves-effect clear-btn full-width">
-				Clear
+				Search
 			</button>
+			{users && users.length > 0 && searchTerm && (
+				<button
+					onClick={clearScreen}
+					className="btn hoverable waves-effect clear-btn full-width">
+					Clear
+				</button>
+			)}
 		</section>
 	);
 };

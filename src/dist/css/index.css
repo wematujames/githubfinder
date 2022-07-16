@@ -13,7 +13,6 @@
 body {
 	font-family: "Lato", sans-serif;
 }
-
 /* Navbar */
 nav {
 	background: var(--primary-color);
@@ -43,8 +42,8 @@ nav {
 }
 .avatar-img {
 	width: 75px;
-	border-radius: 50%;
 	margin-top: 8px;
+	border-radius: 25px;
 }
 .user-view {
 	display: flex;
@@ -130,5 +129,31 @@ a:hover {
 	padding-top: 10rem;
 	display: flex;
 	justify-content: center;
+	align-items: center;
+}
+/* Search user profile */
+.search-user-profile {
+	margin-top: 3rem;
+}
+.user-profile-avatar {
+	margin-top: 1rem;
+	width: 200px;
+	border-radius: 25px;
+}
+.user-details {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin-top: 1rem;
+}
+.user-detail-lable {
+	font-weight: bold;
+	margin-top: 0.2rem;
+	margin-right: 0.7rem;
+}
+.user-numbers {
+	display: grid;
+	column-gap: 1rem;
+	grid-template-columns: 1fr 1fr;
 	align-items: center;
 }

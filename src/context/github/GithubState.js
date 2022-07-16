@@ -1,5 +1,4 @@
 import { useReducer } from "react";
-import axios from "axios";
 
 // Local imports
 import GithubContext from "./GithubContext";
@@ -30,8 +29,10 @@ const GithubState = props => {
 	//Get github users
 	const getUsers = async () => {
 		try {
-			const res = await axios.get("https://api.github.com/users");
-			dispatch({ type: GET_USERS, payload: res.data });
+			setLoading(true);
+			const res = await fetch("https://api.github.com/users");
+			const data = await res.json();
+			dispatch({ type: GET_USERS, payload: data });
 		} catch (e) {
 			errorHandler(e);
 		}
@@ -40,11 +41,14 @@ const GithubState = props => {
 	//Search for Github user
 	const searchUsers = async q => {
 		try {
-			const foundUsers = await axios.get(
-				`https://api.github.com/search/users`,
-				{ params: { q } }
+			setLoading(true);
+			const res = await fetch(
+				`https://api.github.com/search/users?q=${q}`
+				//&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}
+				//& client_secret=${ process.env.REACT_APP_GITHUB_CLIENT_SECRET }
 			);
-			dispatch({ type: SEARCH_USERS, payload: foundUsers.data.items });
+			const data = await res.json();
+			dispatch({ type: SEARCH_USERS, payload: data.items });
 		} catch (e) {
 			errorHandler(e);
 		}
@@ -53,18 +57,10 @@ const GithubState = props => {
 	//Get User
 	const getUser = async username => {
 		try {
-			setLoading();
-			const res = await axios.get(
-				`https://api.github.com/user/${username}`,
-				{
-					params: {
-						client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
-						client_secret:
-							process.env.REACT_APP_GITHUB_CLIENT_SECRET
-					}
-				}
-			);
-			dispatch({ type: GET_USER, payload: res.data });
+			setLoading(true);
+			const res = await fetch(`https://api.github.com/users/${username}`);
+			const data = await res.json();
+			dispatch({ type: GET_USER, payload: data });
 		} catch (e) {
 			errorHandler(e);
 		}
@@ -105,6 +101,7 @@ const GithubState = props => {
 		<GithubContext.Provider
 			value={{
 				users: state.users,
+				user: state.user,
 				githubError: state.githubError,
 				loading: state.loading,
 				searchTerm: state.searchTerm,
