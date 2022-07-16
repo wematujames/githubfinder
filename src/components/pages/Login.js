@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useAuth } from "../../context/contextHooks";
 
@@ -50,7 +51,6 @@ const Login = () => {
 							id="user"
 							type="text"
 							name="user"
-							className="validate"
 							value={loginInfo.user}
 							onChange={handleChange}
 						/>
@@ -71,7 +71,7 @@ const Login = () => {
 					</button>
 				</div>
 				<span>
-					Don't have an account? <a href="/register"> Register</a>
+					Don't have an account? <Link to="/register"> Register</Link>
 				</span>
 			</form>
 		</section>

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import M from "materialize-css/dist/js/materialize.min.js";
 
@@ -17,26 +18,29 @@ const Dropdown = () => {
 	return (
 		<ul id="user-dropdown" className="dropdown-content">
 			<li>
-				<a
-					href="#!"
+				<Link
+					to="#!"
 					data-target="user-profile"
-					className="modal-trigger">
+					className="modal-trigger light-blue-text text-darken-1">
 					Profile
-				</a>
+				</Link>
 			</li>
 			<li>
-				<a
-					href="#!"
+				<Link
+					to="#!"
 					data-target="user-search-history-modal"
-					className="modal-trigger">
+					className="modal-trigger light-blue-text text-darken-1">
 					History
-				</a>
+				</Link>
 			</li>
 			<li className="divider" tabIndex="-1"></li>
 			<li>
-				<a href="#!" onClick={logOut}>
+				<Link
+					to="#!"
+					className="light-blue-text text-darken-1"
+					onClick={logOut}>
 					Logout
-				</a>
+				</Link>
 			</li>
 		</ul>
 	);

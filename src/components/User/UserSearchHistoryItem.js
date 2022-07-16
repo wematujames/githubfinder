@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+import { Link } from "react-router-dom";
 import { useUser } from "../../context/contextHooks";
 
 const UserSearchHistoryItem = ({ searchItem: { searchTerm, _id } }) => {
@@ -10,12 +10,14 @@ const UserSearchHistoryItem = ({ searchItem: { searchTerm, _id } }) => {
 		removeUserSearchTerm(_id);
 	};
 	return (
-		<a href="#!" className="collection-item">
+		<Link to="#!" className="collection-item light-blue-text text-darken-1">
 			{searchTerm}
-			<i className="material-icons right" onClick={removeItem}>
+			<i
+				className="material-icons right red-text text-darken-1"
+				onClick={removeItem}>
 				close
 			</i>
-		</a>
+		</Link>
 	);
 };
 UserSearchHistoryItem.protoTypes = {

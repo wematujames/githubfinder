@@ -1,21 +1,22 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 const SideNavItem = () => {
 	return (
 		<Fragment>
 			<li>
-				<a href="/">Home</a>
+				<Link to="/">Home</Link>
 			</li>
 			<li>
-				<a
-					href="#!"
+				<Link
+					to="#!"
 					data-target="user-search-history-modal"
 					className="modal-trigger">
 					Search History
-				</a>
+				</Link>
 			</li>
 			<li>
-				<a href="#!">Logout</a>
+				<Link to="#!">Logout</Link>
 			</li>
 		</Fragment>
 	);

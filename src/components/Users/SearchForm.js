@@ -33,7 +33,7 @@ const Search = () => {
 	};
 
 	return (
-		<section className="center">
+		<section className="center search-container">
 			<div className="input-field">
 				<input
 					type="text"

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import App from "./App"; //App
+import "materialize-css/dist/css/materialize.min.css";
 import "./dist/css/index.css"; //CSS
 // Context
 import GithubState from "./context/github/GithubState";

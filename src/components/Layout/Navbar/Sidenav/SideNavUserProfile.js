@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const SideNavUserProfile = ({ user }) => {
 	return (
@@ -14,19 +15,19 @@ const SideNavUserProfile = ({ user }) => {
 				) : (
 					<i className="material-icons large">person_pin</i>
 				)}
-				<a href="#name ">
+				<Link to="#name ">
 					<span className="name">
 						{user.fName} {user.lName}
 					</span>
-				</a>
+				</Link>
 				{user.userName && (
-					<a href="#name ">
+					<Link to="#name ">
 						<span className="name">@{user.userName}</span>
-					</a>
+					</Link>
 				)}
-				<a href="#email">
+				<Link to="#email">
 					<span className="email">{user.email}</span>
-				</a>
+				</Link>
 			</div>
 		</li>
 	);

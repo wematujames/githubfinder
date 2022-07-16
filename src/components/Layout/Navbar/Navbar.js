@@ -1,7 +1,7 @@
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 import NavItems from "./NavItems";
-
 import UserSearchHistory from "../../User/UserSearchHistory";
 import UserProfile from "../../User/UserProfile";
 import SideNav from "./SideNav";
@@ -14,16 +14,16 @@ const Navbar = () => {
 		<Fragment>
 			<nav>
 				<div className="nav-wrapper container">
-					<a href="/" className="brand-logo">
+					<Link to="/" className="brand-logo">
 						Github Finder
-					</a>
+					</Link>
 					{user?.fName && (
-						<a
-							href="#!"
+						<Link
+							to="#!"
 							data-target="mobile-demo"
 							className="sidenav-trigger">
 							<i className="material-icons">menu</i>
-						</a>
+						</Link>
 					)}
 					<NavItems />
 				</div>

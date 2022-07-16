@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useAuth } from "../../context/contextHooks";
 
@@ -128,7 +129,7 @@ const Register = () => {
 				<button type="submit" className="btn my full-width">
 					Register
 				</button>
-				Already have an account? <a href="/login"> Login</a>
+				Already have an account? <Link to="/login"> Login</Link>
 			</form>
 		</section>
 	);

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 import M from "materialize-css/dist/js/materialize.min.js";
 
@@ -17,7 +18,7 @@ const UserProfile = () => {
 		<div id="user-profile" className="modal modal2">
 			<div className="modal-content">
 				<div className="user-view center-align">
-					<a href="#user" className="">
+					<div href="#!">
 						{user.profile_img ? (
 							<img
 								className="circle center user-avatar"
@@ -29,20 +30,20 @@ const UserProfile = () => {
 								person_pin
 							</i>
 						)}
-					</a>
-					<a href="#name ">
+					</div>
+					<Link to="#name ">
 						<span className="name">
 							{user.fName} {user.lName}
 						</span>
-					</a>
+					</Link>
 					{user.userName && (
-						<a href="#name ">
+						<Link to="#name ">
 							<span className="name">@{user.userName}</span>
-						</a>
+						</Link>
 					)}
-					<a href="#email">
+					<Link to="#email">
 						<span className="email">{user.email}</span>
-					</a>
+					</Link>
 				</div>
 			</div>
 		</div>

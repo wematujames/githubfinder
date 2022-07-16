@@ -1,17 +1,10 @@
-import { useEffect } from "react";
-
 import { useGithub } from "../../context/contextHooks";
 
 import UserItem from "./UserItem";
 import PreLoader from "../Layout/PreLoader";
 
 const Users = () => {
-	const { loading, getUsers, users } = useGithub(); //users,
-
-	useEffect(() => {
-		getUsers();
-		//eslint-disable-next-line
-	}, []);
+	const { loading, users } = useGithub();
 
 	if (loading) return <PreLoader />;
 	return (

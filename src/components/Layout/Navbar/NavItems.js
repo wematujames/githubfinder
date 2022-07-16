@@ -1,4 +1,5 @@
 import { useAuth } from "../../../context/contextHooks";
+import { Link } from "react-router-dom";
 
 import Dropdown from "./Dropdown";
 
@@ -8,22 +9,22 @@ const NavItems = () => {
 	return (
 		<ul className="right hide-on-med-and-down">
 			<li>
-				<a href="/">Home</a>
+				<Link to="/">Home</Link>
 			</li>
 			<li>
-				<a href="/about">About</a>
+				<Link to="/about">About</Link>
 			</li>
 			<li>
 				{user?.fName && (
 					<>
-						<a
-							href="#!"
+						<Link
+							to="#!"
 							className="dropdown-trigger"
 							data-target="user-dropdown">
 							<i className="material-icons">
 								keyboard_arrow_down
 							</i>
-						</a>
+						</Link>
 						<Dropdown />
 					</>
 				)}
