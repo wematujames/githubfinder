@@ -9,11 +9,10 @@ const AppNotifcations = () => {
 	const { authError } = useAuth();
 
 	useEffect(() => {
-		if (githubError) M.toast({ html: `Error: ${githubError.msg}` });
-		if (userError) M.toast({ html: `Error: ${userError.msg}` });
-		if (authError) M.toast({ html: `Error: ${authError.msg}` });
-		if (userNotification)
-			M.toast({ html: `Error: ${userNotification.msg}` });
+		if (githubError) M.toast({ html: `${githubError.msg}` });
+		if (userError) M.toast({ html: `${userError.msg}` });
+		if (authError) M.toast({ html: `${authError.msg}` });
+		if (userNotification) M.toast({ html: `${userNotification.msg}` });
 	}, [githubError, userError, userNotification, authError]);
 	return <></>;
 };
