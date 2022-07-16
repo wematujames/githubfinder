@@ -8,10 +8,10 @@ import PreLoader from "../Layout/PreLoader";
 const User = () => {
 	const { username } = useParams();
 
-	const { loading, getUser } = useGithub();
+	const { loading } = useGithub();
 
 	useEffect(() => {
-		getUser(username);
+		// getUser(username);
 		//eslint-disable-next-line
 	}, []);
 

@@ -33,10 +33,7 @@ const GithubState = props => {
 			const res = await axios.get("https://api.github.com/users");
 			dispatch({ type: GET_USERS, payload: res.data });
 		} catch (e) {
-			dispatch({ type: SET_ERROR, payload: e });
-			setTimeout(() => {
-				dispatch({ type: CLEAR_ERROR });
-			}, 5000);
+			errorHandler(e);
 		}
 	};
 
@@ -49,10 +46,7 @@ const GithubState = props => {
 			);
 			dispatch({ type: SEARCH_USERS, payload: foundUsers.data.items });
 		} catch (e) {
-			dispatch({ type: SET_ERROR, payload: e.response.data.message });
-			setTimeout(() => {
-				dispatch({ type: CLEAR_ERROR });
-			}, 5000);
+			errorHandler(e);
 		}
 	};
 
@@ -61,15 +55,18 @@ const GithubState = props => {
 		try {
 			setLoading();
 			const res = await axios.get(
-				`https://api.github.com/user/${username}`
+				`https://api.github.com/user/${username}`,
+				{
+					params: {
+						client_id: process.env.REACT_APP_GITHUB_CLIENT_ID,
+						client_secret:
+							process.env.REACT_APP_GITHUB_CLIENT_SECRET
+					}
+				}
 			);
 			dispatch({ type: GET_USER, payload: res.data });
 		} catch (e) {
-			console.log(e);
-			dispatch({ type: SET_ERROR, payload: e.response.data.message });
-			setTimeout(() => {
-				dispatch({ type: CLEAR_ERROR });
-			}, 5000);
+			errorHandler(e);
 		}
 	};
 
@@ -86,6 +83,14 @@ const GithubState = props => {
 	// Set loading for spinner to show
 	const setLoading = state => {
 		dispatch({ type: SET_LOADING, payload: state });
+	};
+
+	//Error handler
+	const errorHandler = e => {
+		dispatch({ type: SET_ERROR, payload: e.response.data.message });
+		setTimeout(() => {
+			dispatch({ type: CLEAR_ERROR });
+		}, 5000);
 	};
 
 	return (
