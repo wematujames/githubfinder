@@ -18,25 +18,25 @@ const UserReducer = (state, action) => {
 		case REMOVE_USER_SEARCH_TERM:
 			return {
 				...state,
-				notification: action.payload,
+				userNotification: action.payload,
 				loading: false
 			};
 		case SET_ERROR:
 			return {
 				...state,
 				loading: false,
-				useError: action.payload
+				userError: action.payload
 			};
 		case SET_NOTIFICATION:
 			return {
 				...state,
-				notificaion: action.payload
+				userNotification: action.payload
 			};
 		case CLEAR_ERROR:
 		case CLEAR_NOTIFICATION:
 			return {
 				...state,
-				notification: null,
+				userNotification: null,
 				loading: false,
 				userError: null
 			};

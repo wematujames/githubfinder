@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 
 import M from "materialize-css/dist/js/materialize.min.js";
 
-const UserProfile = ({ user }) => {
+import { useAuth } from "../../context/contextHooks";
+
+const UserProfile = () => {
+	const { user } = useAuth();
+
 	useEffect(() => {
 		const modal = document.querySelectorAll(".modal2");
 		M.Modal.init(modal);

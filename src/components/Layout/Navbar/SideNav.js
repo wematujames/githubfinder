@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 
-import useAuth from "../../hooks/useAuth";
+import { useAuth } from "../../../context/contextHooks";
 
 import SideNavUserProfile from "./Sidenav/SideNavUserProfile";
 import SideNavItems from "./Sidenav/SideNavItems";

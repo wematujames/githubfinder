@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import M from "materialize-css/dist/js/materialize.min.js";
-
-import useAuth from "../hooks/useAuth";
+import { useAuth } from "../../context/contextHooks";
 
 const Login = () => {
-	const { user, login, loadUser, authError, token } = useAuth();
+	const { user, login, loadUser, token, setAuthError } = useAuth();
 
 	const [loginInfo, setLoginInfo] = useState({ user: "", password: "" });
 
@@ -17,7 +15,10 @@ const Login = () => {
 	const handleSubmit = async e => {
 		e.preventDefault();
 		if (!loginInfo.password || !loginInfo.user) {
-			return M.toast({ html: "Please complete all fields" });
+			return setAuthError({
+				msg: "Please complete all fields",
+				type: "warning"
+			});
 		}
 		login(loginInfo);
 	};
@@ -27,12 +28,11 @@ const Login = () => {
 
 	useEffect(
 		function () {
-			if (authError) M.toast({ html: `Error: ${authError}` });
 			if (token) loadUser();
 			if (user) navigate(from, { replace: true });
 		},
 		//eslint-disable-next-line
-		[user, token, authError]
+		[user, token]
 	);
 
 	return (

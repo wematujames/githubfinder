@@ -87,7 +87,15 @@ const GithubState = props => {
 
 	//Error handler
 	const errorHandler = e => {
-		dispatch({ type: SET_ERROR, payload: e.response.data.message });
+		dispatch({
+			type: SET_ERROR,
+			payload: {
+				msg: e.response?.data?.message
+					? e.response?.data?.message
+					: "An error occured",
+				type: "danger"
+			}
+		});
 		setTimeout(() => {
 			dispatch({ type: CLEAR_ERROR });
 		}, 5000);

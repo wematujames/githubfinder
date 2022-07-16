@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import M from "materialize-css/dist/js/materialize.min.js";
-
-import useAuth from "../hooks/useAuth";
+import { useAuth } from "../../context/contextHooks";
 
 const Register = () => {
 	const navigate = useNavigate(); //Navigation
-	const { user, registerUser, loadUser, authError, token } = useAuth();
+	const { user, registerUser, loadUser, token, setAuthError } = useAuth();
 	const [registerInfo, setRegisterInfo] = useState({
 		fName: "",
 		lName: "",
@@ -29,22 +27,31 @@ const Register = () => {
 			value => !!value
 		);
 		if (!allfieldsCompeleted)
-			return M.toast({ html: "Please complete all fields" });
-		//Passwords match
+			return setAuthError({
+				msg: "Please complete all fields",
+				type: "warning"
+			}); // check all fields complete
+		if (registerInfo.password.length < 8)
+			return setAuthError({
+				msg: "Password can't be less than 8 characters.",
+				type: "warning"
+			}); //Check passord <= 8
 		if (registerInfo.password !== registerInfo.password2)
-			return M.toast({ html: "Password do not match" });
+			return setAuthError({
+				msg: "Password do not match",
+				type: "warning"
+			}); // Passwords match
 		//Finally attempt to register user
 		registerUser(registerInfo);
 	};
 
 	useEffect(
 		function () {
-			if (authError) M.toast({ html: `Error: ${authError}` });
 			if (token) loadUser();
 			if (user) navigate("/", { replace: true });
 		},
 		//eslint-disable-next-line
-		[user, localStorage.token, authError]
+		[user, localStorage.token]
 	);
 
 	return (
@@ -92,7 +99,6 @@ const Register = () => {
 							id="email"
 							type="email"
 							name="email"
-							className="validate"
 							value={registerInfo.email}
 							onChange={handleChange}
 						/>

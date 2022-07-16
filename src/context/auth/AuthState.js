@@ -80,6 +80,11 @@ const AuthState = props => {
 		}
 	};
 
+	//Set error relation to authentication
+	const setAuthError = err => {
+		dispatch({ type: AUTH_ERROR, payload: err });
+	};
+
 	//Logout user
 	const logOut = async () => {
 		try {
@@ -91,17 +96,20 @@ const AuthState = props => {
 	};
 
 	// Set loading for spinner to show
-	const setLoading = state => {
-		dispatch({ type: SET_LOADING, payload: state });
+	const setLoading = val => {
+		dispatch({ type: SET_LOADING, payload: val });
 	};
 
 	//error dispatcher func
 	const errHandler = e => {
 		dispatch({
 			type: AUTH_ERROR,
-			payload: e.response?.data?.error?.msg
-				? e.response.data.error.msg
-				: "Something went wrong please try again later..."
+			payload: {
+				msg: e.response?.data?.error?.msg
+					? e.response.data.error.msg
+					: "Something went wrong please try again later...",
+				type: "danger"
+			}
 		});
 		setTimeout(() => {
 			dispatch({ type: CLEAR_ERROR });
@@ -122,7 +130,8 @@ const AuthState = props => {
 				login,
 				loadUser,
 				logOut,
-				getSearchHistory
+				getSearchHistory,
+				setAuthError
 			}}>
 			{props.children}
 		</AuthContext.Provider>

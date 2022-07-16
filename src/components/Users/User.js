@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import useGithub from "../hooks/useGithub";
+import { useGithub } from "../../context/contextHooks";
 
 import PreLoader from "../Layout/PreLoader";
 

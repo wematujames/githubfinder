@@ -17,9 +17,9 @@ const UserState = props => {
 	const initialState = {
 		userSearchHistory: [],
 		loading: true,
-		error: null,
+		userError: null,
 		searchTerm: "",
-		notification: ""
+		userNotification: ""
 	};
 
 	const [state, dispatch] = useReducer(UserReducer, initialState);
@@ -57,7 +57,7 @@ const UserState = props => {
 			getSearchHistory();
 			dispatch({
 				type: REMOVE_USER_SEARCH_TERM,
-				payload: res.data.msg
+				payload: { msg: res.data?.msg || "Success" }
 			});
 			setTimeout(() => {
 				dispatch({
@@ -76,7 +76,15 @@ const UserState = props => {
 
 	//Error handler
 	const errorHandler = e => {
-		dispatch({ type: SET_ERROR, payload: e.response.data.message });
+		dispatch({
+			type: SET_ERROR,
+			payload: {
+				msg: e.response?.data?.message
+					? e.response?.data?.message
+					: "An error occured",
+				type: "danger"
+			}
+		});
 		setTimeout(() => {
 			dispatch({ type: CLEAR_ERROR });
 		}, 5000);
@@ -87,9 +95,9 @@ const UserState = props => {
 			value={{
 				searchHistory: state.userSearchHistory,
 				loading: state.loading,
-				error: state.error,
+				userError: state.userError,
 				searchTerm: state.searchTerm,
-				notification: state.notification,
+				userNotification: state.userNotification,
 				removeUserSearchTerm,
 				getSearchHistory,
 				addUserSearchTetm

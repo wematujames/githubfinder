@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import useUser from "../hooks/useUser";
+import { useUser } from "../../context/contextHooks";
 
 const UserSearchHistoryItem = ({ searchItem: { searchTerm, _id } }) => {
 	const { removeUserSearchTerm } = useUser();

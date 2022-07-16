@@ -1,7 +1,6 @@
-import React from "react";
+import { useAuth } from "../../../context/contextHooks";
 
 import Dropdown from "./Dropdown";
-import useAuth from "../../hooks/useAuth";
 
 const NavItems = () => {
 	const { user } = useAuth();

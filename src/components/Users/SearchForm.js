@@ -1,18 +1,8 @@
-import { useEffect } from "react";
-
-import M from "materialize-css/dist/js/materialize.min.js";
-
-import useGithub from "../hooks/useGithub";
+import { useGithub } from "../../context/contextHooks";
 
 const Search = () => {
-	const {
-		githubError,
-		searchUsers,
-		setLoading,
-		clear,
-		searchTerm,
-		setSearch
-	} = useGithub();
+	const { searchUsers, setLoading, clear, searchTerm, setSearch } =
+		useGithub();
 
 	//Delay search
 	const debounceFn = (func, timeout = 1000) => {
@@ -41,11 +31,6 @@ const Search = () => {
 		setSearch("");
 		setLoading(false);
 	};
-
-	useEffect(() => {
-		if (githubError) M.toast({ html: `Error: ${githubError}` });
-		// eslint-disable-next-line
-	}, [githubError]);
 
 	return (
 		<section className="center">

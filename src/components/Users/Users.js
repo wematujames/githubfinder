@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import useGithub from "../../components/hooks/useGithub";
+
+import { useGithub } from "../../context/contextHooks";
 
 import UserItem from "./UserItem";
 import PreLoader from "../Layout/PreLoader";

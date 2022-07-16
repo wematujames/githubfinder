@@ -6,7 +6,7 @@ import UserSearchHistory from "../../User/UserSearchHistory";
 import UserProfile from "../../User/UserProfile";
 import SideNav from "./SideNav";
 
-import useAuth from "../../hooks/useAuth";
+import { useAuth } from "../../../context/contextHooks";
 
 const Navbar = () => {
 	const { user } = useAuth();
@@ -31,7 +31,7 @@ const Navbar = () => {
 			{user?.fName && (
 				<>
 					<UserSearchHistory />
-					<UserProfile user={user} />
+					<UserProfile />
 					<SideNav />
 				</>
 			)}
