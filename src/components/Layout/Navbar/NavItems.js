@@ -21,9 +21,12 @@ const NavItems = () => {
 							to="#!"
 							className="dropdown-trigger"
 							data-target="user-dropdown">
-							<i className="material-icons">
-								keyboard_arrow_down
-							</i>
+							<span style={{ display: "flex" }}>
+								{user.fName}
+								<i className="material-icons">
+									keyboard_arrow_down
+								</i>
+							</span>
 						</Link>
 						<Dropdown />
 					</>

@@ -1,15 +1,11 @@
 import React, { useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 
-import { useAuth } from "../../../context/contextHooks";
-
 import SideNavUserProfile from "./Sidenav/SideNavUserProfile";
 import SideNavItems from "./Sidenav/SideNavItems";
 import About from "../About";
 
 const SideNav = () => {
-	const { user } = useAuth();
-
 	useEffect(() => {
 		const elems = document.querySelectorAll(".sidenav");
 		M.Sidenav.init(elems);
@@ -17,7 +13,7 @@ const SideNav = () => {
 
 	return (
 		<ul className="sidenav" id="mobile-demo">
-			<SideNavUserProfile user={user} />
+			<SideNavUserProfile />
 			<div className="divider"></div>
 			<SideNavItems />
 			<About />

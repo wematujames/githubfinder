@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { useGithub } from "../../context/contextHooks";
 
@@ -23,11 +23,11 @@ const User = () => {
 					<div className="card-stacked">
 						<div className="card-content center-align">
 							<span className="card-title">
-								<a
-									href="#!"
+								<Link
+									to="/"
 									className="material-icons left black-text">
 									keyboard_arrow_left
-								</a>
+								</Link>
 								{user.login}
 							</span>
 							<p className="row">

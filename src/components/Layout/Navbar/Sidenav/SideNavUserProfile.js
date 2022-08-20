@@ -1,8 +1,10 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../../../context/contextHooks";
 
-const SideNavUserProfile = ({ user }) => {
+const SideNavUserProfile = () => {
+	const { user } = useAuth();
+
 	return (
 		<li className="container">
 			<div className="user-view center-align">

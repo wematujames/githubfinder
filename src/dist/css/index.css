@@ -52,8 +52,7 @@ nav {
 	align-items: center;
 }
 .side-menu-about {
-	margin-top: 20rem;
-	padding-top: auto;
+	padding-top: 25vh;
 }
 /* login */
 .form-wrapper {
@@ -68,31 +67,14 @@ nav {
 	border-radius: 5px;
 	max-width: 400px;
 }
-/* Alert */
-.alert-wrapper {
-	border: 2px solid red;
-	border-radius: 5px;
-	padding: 0.7rem 1.2rem;
-	margin: 1rem 0.5rem;
-	display: flex;
-	align-items: center;
-}
-.alert-msg {
-	margin-left: 0.5rem;
-	flex: 1;
-}
-.close {
-	cursor: pointer;
-}
 /* Utility */
 .btn {
 	background: var(--primary-color);
-	transition-duration: 0.2s;
+	transition-duration: 0.1s;
 }
 .clear-btn {
 	margin-top: 0.5rem;
 }
-
 .btn:hover,
 .btn:active,
 .btn:focus {

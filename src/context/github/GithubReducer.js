@@ -6,7 +6,8 @@ import {
 	SET_ERROR,
 	CLEAR,
 	SET_SEARCHTERM,
-	GET_USER
+	GET_USER,
+	SET_TIMER_ID
 } from "../types";
 
 const GithubReducer = (state, action) => {
@@ -23,6 +24,11 @@ const GithubReducer = (state, action) => {
 				...state,
 				user: action.payload,
 				loading: false
+			};
+		case SET_TIMER_ID:
+			return {
+				...state,
+				timerId: action.payload
 			};
 		case SET_ERROR:
 			return {

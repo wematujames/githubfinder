@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+import { useUser } from "../contextHooks";
 
 // Local imports
 import GithubContext from "./GithubContext";
@@ -11,16 +12,19 @@ import {
 	CLEAR_ERROR,
 	CLEAR,
 	SET_SEARCHTERM,
-	GET_USER
+	GET_USER,
+	SET_TIMER_ID
 } from "../types";
 
 const GithubState = props => {
+	const { addUserSearchTerm } = useUser();
 	const initialState = {
 		users: [],
 		loading: false,
 		githubError: null,
-		searchTerm: "",
-		user: {}
+		user: {},
+		timerId: 0,
+		searchTerm: " "
 	};
 
 	const [state, dispatch] = useReducer(GithubReducer, initialState);
@@ -39,19 +43,25 @@ const GithubState = props => {
 	};
 
 	//Search for Github user
-	const searchUsers = async q => {
-		try {
-			setLoading(true);
-			const res = await fetch(
-				`https://api.github.com/search/users?q=${q}`
-				//&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}
-				//& client_secret=${ process.env.REACT_APP_GITHUB_CLIENT_SECRET }
-			);
-			const data = await res.json();
-			dispatch({ type: SEARCH_USERS, payload: data.items });
-		} catch (e) {
-			errorHandler(e);
-		}
+	const searchUsers = q => {
+		if (!q.trim()) return;
+		setTimerId(
+			setTimeout(async () => {
+				try {
+					setLoading(true);
+					const res = await fetch(
+						`https://api.github.com/search/users?q=${q}`
+						//&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}
+						//& client_secret=${ process.env.REACT_APP_GITHUB_CLIENT_SECRET }
+					);
+					const data = await res.json();
+					dispatch({ type: SEARCH_USERS, payload: data.items });
+					addUserSearchTerm(q);
+				} catch (e) {
+					errorHandler(e);
+				}
+			}, 2000)
+		);
 	};
 
 	//Get User
@@ -64,6 +74,11 @@ const GithubState = props => {
 		} catch (e) {
 			errorHandler(e);
 		}
+	};
+
+	//Set timer id
+	const setTimerId = id => {
+		dispatch({ type: SET_TIMER_ID, payload: id });
 	};
 
 	//Set search term
@@ -104,13 +119,15 @@ const GithubState = props => {
 				user: state.user,
 				githubError: state.githubError,
 				loading: state.loading,
+				timerId: state.timerId,
 				searchTerm: state.searchTerm,
 				getUser,
 				getUsers,
 				searchUsers,
 				setLoading,
 				clear,
-				setSearch
+				setSearch,
+				setTimerId
 			}}>
 			{props.children}
 		</GithubContext.Provider>

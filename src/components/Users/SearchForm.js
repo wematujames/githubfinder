@@ -1,12 +1,18 @@
 import { useState } from "react";
-import { useGithub, useUser } from "../../context/contextHooks";
+import { useGithub } from "../../context/contextHooks";
 
 const Search = () => {
 	const [searchterm, setSearchTerm] = useState("");
 
-	const { searchUsers, setLoading, clear, searchTerm, users } = useGithub();
-
-	const { addUserSearchTerm } = useUser();
+	const {
+		searchUsers,
+		setLoading,
+		clear,
+		searchTerm,
+		setSearch,
+		users,
+		timerId
+	} = useGithub();
 
 	//clear input and fetched users
 	const clearScreen = () => {
@@ -16,9 +22,14 @@ const Search = () => {
 
 	//Search users
 	const handleSearch = e => {
-		e.preventDefault();
-		searchUsers(e.target.value);
-		addUserSearchTerm(e.target.value);
+		setSearchTerm(e.target.value);
+		if (!searchTerm) return;
+
+		setSearch(e.target.value);
+		// 	return setNotification({ msg: "Please enter some text" });
+		console.log(timerId);
+		if (timerId) clearTimeout(timerId);
+		searchUsers(searchTerm);
 	};
 
 	return (
@@ -30,7 +41,7 @@ const Search = () => {
 					id="search"
 					className="block-input"
 					value={searchterm}
-					onChange={e => setSearchTerm(e.target.value)}
+					onChange={handleSearch}
 				/>
 				<label htmlFor="fName">Search for someone...</label>
 			</div>

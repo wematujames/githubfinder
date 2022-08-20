@@ -10,7 +10,8 @@ import {
 	SET_LOADING,
 	SET_ERROR,
 	CLEAR_ERROR,
-	CLEAR_NOTIFICATION
+	CLEAR_NOTIFICATION,
+	SET_NOTIFICATION
 } from "../types";
 
 const UserState = props => {
@@ -23,6 +24,7 @@ const UserState = props => {
 	};
 
 	const [state, dispatch] = useReducer(UserReducer, initialState);
+
 	//Actions
 	//Get user search history
 	const getSearchHistory = async () => {
@@ -46,7 +48,7 @@ const UserState = props => {
 				},
 				{
 					headers: {
-						"Content-Type|": "application/json"
+						"Content-Type": "application/json"
 					}
 				}
 			);
@@ -77,6 +79,13 @@ const UserState = props => {
 		}
 	};
 
+	//Set notification
+	const setNotification = note => {
+		dispatch({ type: SET_NOTIFICATION, payload: note });
+		setTimeout(() => {
+			dispatch({ type: CLEAR_NOTIFICATION });
+		}, 5000);
+	};
 	// Set loading for spinner to show
 	const setLoading = state => {
 		dispatch({ type: SET_LOADING, payload: state });
@@ -108,7 +117,8 @@ const UserState = props => {
 				userNotification: state.userNotification,
 				removeUserSearchTerm,
 				getSearchHistory,
-				addUserSearchTerm
+				addUserSearchTerm,
+				setNotification
 			}}>
 			{props.children}
 		</UserContex.Provider>
