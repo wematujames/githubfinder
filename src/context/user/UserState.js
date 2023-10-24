@@ -31,7 +31,7 @@ const UserState = props => {
 		try {
 			setLoading(true);
 			setLoading();
-			const res = await axios.get("/api/v1/searchterms/");
+			const res = await axios.get("http://localhost:5000/api/v1/searchterms/");
 			dispatch({ type: GET_USER_SEARCH_HISTORY, payload: res.data.data });
 		} catch (e) {
 			errorHandler(e);
@@ -42,15 +42,9 @@ const UserState = props => {
 	const addUserSearchTerm = async term => {
 		try {
 			await axios.post(
-				"/api/v1/searchterms/",
-				{
-					searchTerm: term
-				},
-				{
-					headers: {
-						"Content-Type": "application/json"
-					}
-				}
+				"http://localhost:5000/api/v1/searchterms/",
+				{ searchTerm: term },
+				{ headers: { "Content-Type": "application/json" } }
 			);
 
 			getSearchHistory();
@@ -63,7 +57,7 @@ const UserState = props => {
 	const removeUserSearchTerm = async id => {
 		try {
 			setLoading(true);
-			const res = await axios.delete(`/api/v1/searchterms/${id}`);
+			const res = await axios.delete(`http://localhost:5000/api/v1/searchterms/${id}`);
 			getSearchHistory();
 			dispatch({
 				type: REMOVE_USER_SEARCH_TERM,

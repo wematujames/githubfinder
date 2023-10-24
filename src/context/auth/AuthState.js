@@ -31,7 +31,7 @@ const AuthState = props => {
 	//Register user
 	const registerUser = async regInfo => {
 		try {
-			const res = await axios.post("/api/v1/auth/register", regInfo);
+			const res = await axios.post("http://localhost:5000/api/v1/auth/register", regInfo);
 			dispatch({ type: REGISTER_USER, payload: res.data.token });
 			// setAuthTokenHeader();
 			// loadUser();
@@ -43,7 +43,7 @@ const AuthState = props => {
 	//Login
 	const login = async creds => {
 		try {
-			const res = await axios.post("/api/v1/auth/login", creds);
+			const res = await axios.post("http://localhost:5000/api/v1/auth/login", creds);
 			dispatch({ type: LOGIN, payload: res.data.token });
 		} catch (e) {
 			errHandler(e);
@@ -54,7 +54,7 @@ const AuthState = props => {
 	const loadUser = async () => {
 		setAuthTokenHeader();
 		try {
-			const res = await axios.get("/api/v1/auth/me");
+			const res = await axios.get("http://localhost:5000/api/v1/auth/me");
 			dispatch({ type: LOAD_USER, payload: res.data.data });
 		} catch (e) {
 			errHandler(e);
@@ -65,7 +65,7 @@ const AuthState = props => {
 	const getSearchHistory = async () => {
 		try {
 			setLoading();
-			const res = await axios.get("/api/v1/searchterms/");
+			const res = await axios.get("http://localhost:5000/api/v1/searchterms/");
 			dispatch({ type: GET_USER_SEARCH_HISTORY, payload: res.data.data });
 		} catch (e) {
 			errHandler(e);
@@ -80,7 +80,7 @@ const AuthState = props => {
 	//Logout user
 	const logOut = async () => {
 		try {
-			await axios.post("/api/v1/auth/logout");
+			await axios.post("http://localhost:5000/api/v1/auth/logout");
 			dispatch({ type: LOGOUT });
 		} catch (e) {
 			errHandler(e);
