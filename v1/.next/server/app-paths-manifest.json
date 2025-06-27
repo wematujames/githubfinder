@@ -1,0 +1,8 @@
+{
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js",
+  "/(protected)/about/page": "app/(protected)/about/page.js",
+  "/(protected)/user/page": "app/(protected)/user/page.js",
+  "/(protected)/find/page": "app/(protected)/find/page.js"
+}
